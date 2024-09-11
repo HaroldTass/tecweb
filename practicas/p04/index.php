@@ -163,13 +163,16 @@ $c = (double) $a;<br>
 </p>
 <?php
 $a = "7 personas";
-$b = (integer) $a;
-$a = "923";
-$c = (double) $a;
+echo "Valor de \$a: $a<br>";
 
-echo "Valor de \$a: $a".'<br>'; 
-echo "Valor de \$b: $b".'<br>'; 
-echo "Valor de \$c: $c".'<br>'; 
+$b = (integer) $a;
+echo "Valor de \$b: $b<br>"; 
+
+$a = "9E3";
+echo "Valor de \$a: $a<br>"; 
+
+$c = (double) $a;
+echo "Valor de \$c: $c<br>";
 
 ?>
 
