@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Productos</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            if (productId) {
+                fetch(`get_productos_xhtml_v2.php?id=${productId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('id').value = data.id;
+                        document.getElementById('nombre').value = data.nombre;
+                        document.getElementById('marca').value = data.marca;
+                        document.getElementById('modelo').value = data.modelo;
+                        document.getElementById('precio').value = data.precio;
+                        document.getElementById('detalles').value = data.detalles;
+                        document.getElementById('unidades').value = data.unidades;
+                        document.getElementById('imagen').value = data.imagen;
+                    });
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>Editar Producto</h1>
+    <form action="update_producto.php" method="post" enctype="multipart/form-data">
+        
+        <label for="id">ID:</label>
+        <input type="number" id="id" name="id">
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required maxlength="100"><br><br>
+
+        <label for="marca">Marca:</label>
+        <input type="text" id="marca" name="marca" required maxlength="100"><br><br>
+
+        <label for="modelo">Modelo:</label>
+        <input type="text" id="modelo" name="modelo" required pattern="[A-Za-z0-9]{1,25}" maxlength="25"><br><br>
+
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" step="0.01" required min="99.99"><br><br>
+
+        <label for="detalles">Detalles:</label>
+        <textarea id="detalles" name="detalles" maxlength="250"></textarea><br><br>
+
+        <label for="unidades">Unidades:</label>
+        <input type="number" id="unidades" name="unidades" required min="0"><br><br>
+
+        <label for="imagen">Imagen:</label>
+        <input type="text" id="imagen" name="imagen"><br><br>
+
+        <input type="submit" value="Actualizar Producto">
+    </form>
+    <br>
+    <a href="get_productos_xhtml_v2.php">Ver Productos XHTML</a><br>
+    <a href="get_productos_vigentes_v2.php">Ver Productos Vigentes</a>
+</body>
+</html>
