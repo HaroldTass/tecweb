@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Productos</title>
+</head>
+<body>
+    <h1>Registro de Nuevos Productos</h1>
+    <form id="productoForm" method="post" enctype="multipart/form-data">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre"><br><br>
+
+        <label for="marca">Marca:</label>
+        <select id="marca" name="marca">
+            <option value="">Seleccione una marca</option>
+            <option value="marca1">Samsung</option>
+            <option value="marca2">Apple</option>
+            <option value="marca3">Huawei</option>
+        </select><br><br>
+
+        <label for="modelo">Modelo:</label>
+        <input type="text" id="modelo" name="modelo"><br><br>
+
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" step="0.01"><br><br>
+
+        <label for="detalles">Detalles:</label>
+        <textarea id="detalles" name="detalles"></textarea><br><br>
+
+        <label for="unidades">Unidades:</label>
+        <input type="number" id="unidades" name="unidades"><br><br>
+
+        <label for="imagen">Imagen:</label>
+        <input type="text" id="imagen" name="imagen"><br><br>
+
+        <input type="submit" value="Registrar Producto">
+    </form>
+
+    <script>
+        document.getElementById('productoForm').addEventListener('submit', function(event) {
+            var nombre = document.getElementById('nombre').value;
+            var marca = document.getElementById('marca').value;
+            var modelo = document.getElementById('modelo').value;
+            var precio = parseFloat(document.getElementById('precio').value);
+            var detalles = document.getElementById('detalles').value;
+            var unidades = parseInt(document.getElementById('unidades').value);
+            var imagen = document.getElementById('imagen').value;
+
+            // Validaciones
+            if (!nombre || nombre.length > 100) {
+                alert("El nombre es requerido y debe tener 100 caracteres o menos.");
+                event.preventDefault();
+            }
+
+            if (!marca) {
+                alert("La marca es requerida y debe ser seleccionada de la lista.");
+                event.preventDefault();
+            }
+
+            
+            if (!modelo || modelo.length > 25) {
+                alert("El modelo es requerido, debe ser texto alfanumérico y tener 25 caracteres o menos.");
+                event.preventDefault();
+            }
+
+            if (isNaN(precio) || precio <= 99.99) {
+                alert("El precio es requerido y debe ser mayor a 99.99.");
+                event.preventDefault();
+            }
+
+            if (detalles && detalles.length > 250) {
+                alert("Los detalles deben tener 250 caracteres o menos.");
+                event.preventDefault();
+            }
+
+            if (isNaN(unidades) || unidades < 0) {
+                alert("Las unidades son requeridas y el número registrado debe ser mayor o igual a 0.");
+                event.preventDefault();
+            }
+
+            if (!imagen) {
+                document.getElementById('imagen').value = 'ruta/de/imagen/por/defecto.jpg';
+            }
+        });
+    </script>
+</body>
+</html>
